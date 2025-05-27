@@ -34,16 +34,65 @@ const loginSchema = z.object({
 });
 
 const SingInForm = () => {
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof loginSchema>) => {
+    console.log(values);
+  };
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Login</CardTitle>
-        <CardDescription>Faça login para continuar.</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-2"></CardContent>
-      <CardFooter>
-        <Button>Entrar</Button>
-      </CardFooter>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <CardHeader>
+            <CardTitle>Login</CardTitle>
+            <CardDescription>Faça o login para continuar.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>E-mail</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Digite seu e-mail" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Senha</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Digite sua senha"
+                      type="password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+          <CardFooter>
+            <Button type="submit" className="w-full">
+              Entrar
+            </Button>
+          </CardFooter>
+        </form>
+      </Form>
     </Card>
   );
 };
