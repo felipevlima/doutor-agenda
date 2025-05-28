@@ -1,6 +1,8 @@
 "use client";
+import { url } from "inspector";
 import {
   CalendarDays,
+  Diamond,
   LayoutDashboard,
   LogOut,
   Stethoscope,
@@ -8,7 +10,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -55,9 +57,18 @@ const items = [
   },
 ];
 
+const otherItems = [
+  {
+    title: "Planos",
+    url: "/plans",
+    icon: Diamond,
+  },
+];
+
 export function AppSidebar() {
   const router = useRouter();
   const session = authClient.useSession();
+  const path = usePathname();
 
   const handleSignOout = async () => {
     await authClient.signOut({
@@ -81,7 +92,24 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild isActive={path === item.url}>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Outros</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {otherItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild isActive={path === item.url}>
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
