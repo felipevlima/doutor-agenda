@@ -6,8 +6,8 @@ import Logo from "@/assets/logo.svg";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { auth } from "@/lib/auth";
 
-import SingInForm from "./components/singInForm";
-import SingUpForm from "./components/singUpForm";
+import SingInForm from "./_components/singInForm";
+import SingUpForm from "./_components/singUpForm";
 
 const AuthenticationPage = async () => {
   const session = await auth.api.getSession({
