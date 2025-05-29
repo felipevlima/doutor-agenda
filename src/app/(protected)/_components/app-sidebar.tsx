@@ -1,8 +1,8 @@
 "use client";
-
 import {
   CalendarDays,
   Diamond,
+  EllipsisVertical,
   LayoutDashboard,
   LogOut,
   Stethoscope,
@@ -125,21 +125,20 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton size="lg">
-                  <Avatar>
-                    <AvatarFallback>F</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="text-sm">
-                      {session.data?.user?.clinic?.name}
-                    </p>
-                    <p className="text-muted-foreground">
-                      {session.data?.user.email}
-                    </p>
-                  </div>
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
+              <SidebarMenuButton size="lg">
+                <Avatar>
+                  <AvatarFallback>F</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm">{session.data?.user?.clinic?.name}</p>
+                  <p className="text-muted-foreground">
+                    {session.data?.user.email}
+                  </p>
+                </div>
+                <DropdownMenuTrigger asChild>
+                  <EllipsisVertical />
+                </DropdownMenuTrigger>
+              </SidebarMenuButton>
               <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => handleSignOout()}>
                   <LogOut />

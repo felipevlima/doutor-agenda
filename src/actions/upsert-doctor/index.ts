@@ -1,6 +1,7 @@
 "use server";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 
 import { db } from "@/db";
@@ -44,7 +45,8 @@ export const upsertDoctor = actionClient
 
     upsertDoctorSchema.parse(parsedInput);
 
-    db.insert(doctorsTable)
+    await db
+      .insert(doctorsTable)
       .values({
         ...parsedInput,
         id: parsedInput.id,
@@ -60,4 +62,5 @@ export const upsertDoctor = actionClient
           availableToTime: availableToTimeUTC.format("HH:mm:ss"),
         },
       });
+    revalidatePath("/doctors");
   });
