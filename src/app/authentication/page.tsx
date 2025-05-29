@@ -2,7 +2,6 @@ import { headers } from "next/headers";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-import Logo from "@/assets/logo.svg";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { auth } from "@/lib/auth";
 
@@ -20,7 +19,8 @@ const AuthenticationPage = async () => {
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-8">
-      <Image alt="logo" src={Logo} height={36} />
+      {/* <Image alt="logo" src={Logo} height={36} /> */}
+      <Image alt="Doutor Agenda" src={"/logo.svg"} height={36} />
       <Tabs defaultValue="login" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="login">Login</TabsTrigger>
