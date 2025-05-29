@@ -1,9 +1,14 @@
-import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { db } from "@/db";
-import { usersToClinicsTable } from "@/db/schema";
+import {
+  PageContainer,
+  PageContent,
+  PageDescription,
+  PageHeader,
+  PageHeaderContent,
+  PageHeaderTitle,
+} from "@/components/ui/page-container";
 import { auth } from "@/lib/auth";
 
 import SignOutButton from "./_components/singoutButton";
@@ -17,20 +22,27 @@ const DashboardPage = async () => {
     redirect("/authentication");
   }
 
-  // PEgar as clinicas do usuario
-  const clinics = await db.query.usersToClinicsTable.findMany({
-    where: eq(usersToClinicsTable.userId, session.user.id),
-  });
-
-  if (clinics.length === 0) {
+  if (!session.user.clinic) {
     redirect("/clinic-form");
   }
 
   return (
-    <div>
-      <p>{session?.user.name}</p>
-      <SignOutButton></SignOutButton>
-    </div>
+    <PageContainer>
+      <PageHeader>
+        <PageHeaderContent>
+          <PageHeaderTitle>Dashboard</PageHeaderTitle>
+          <PageDescription>
+            Access a detailed overview of key metrics and patient outcomes
+          </PageDescription>
+        </PageHeaderContent>
+      </PageHeader>
+      <PageContent>
+        <div>
+          <p>{session?.user.name}</p>
+          <SignOutButton></SignOutButton>
+        </div>
+      </PageContent>
+    </PageContainer>
   );
 };
 

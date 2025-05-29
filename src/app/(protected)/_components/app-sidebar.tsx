@@ -1,5 +1,5 @@
 "use client";
-import { url } from "inspector";
+
 import {
   CalendarDays,
   Diamond,
@@ -81,7 +81,7 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar>
+    <Sidebar className="bg-white">
       <SidebarHeader className="border-b p-4">
         <Image alt="Doutor Agenda" src={"/logo.svg"} width={136} height={28} />
       </SidebarHeader>
@@ -131,7 +131,9 @@ export function AppSidebar() {
                     <AvatarFallback>F</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="text-sm">{session.data?.user.clinic.name}</p>
+                    <p className="text-sm">
+                      {session.data?.user?.clinic?.name}
+                    </p>
                     <p className="text-muted-foreground">
                       {session.data?.user.email}
                     </p>
