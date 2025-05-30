@@ -39,7 +39,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ doctor }) => {
           <Avatar className="h-10 w-10">
             <AvatarFallback>{doctorInitials}</AvatarFallback>
           </Avatar>
-          <div>
+          <div className="pl-4">
             <h3 className="text-sm font-medium">{doctor.name}</h3>
             <p className="text-muted-foreground text-sm">{doctor.specialty}</p>
           </div>

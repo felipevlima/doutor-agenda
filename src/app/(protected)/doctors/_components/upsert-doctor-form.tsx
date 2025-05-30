@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+import { Loader2Icon, PlusIcon, TrashIcon } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
@@ -128,7 +129,7 @@ const UpsertDoctorForm = ({ onSuccess, doctor }: UpseartDoctorFormProps) => {
 
   const handleDeleteDoctor = () => {
     if (!doctor) return;
-    deleteDoctorAction.execute({ id: doctor?.id });
+    deleteDoctorAction.execute({ id: doctor.id! });
   };
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -421,7 +422,13 @@ const UpsertDoctorForm = ({ onSuccess, doctor }: UpseartDoctorFormProps) => {
             {doctor && (
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button variant="destructive">Show Dialog</Button>
+                  <Button
+                    variant="outline"
+                    className="cursor-pointer border-red-300 text-red-500 hover:bg-red-50 hover:text-red-600"
+                  >
+                    <TrashIcon className="h-4 w-4" />
+                    Remover
+                  </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
@@ -443,7 +450,17 @@ const UpsertDoctorForm = ({ onSuccess, doctor }: UpseartDoctorFormProps) => {
               </AlertDialog>
             )}
             <Button type="submit" disabled={upsertDoctorAction.isPending}>
-              {upsertDoctorAction.isPending ? "Adicionando..." : "Adicionar"}
+              {upsertDoctorAction.isPending ? (
+                <>
+                  <Loader2Icon className="h-4 w-4 animate-spin" />
+                  Salvando...
+                </>
+              ) : (
+                <>
+                  <PlusIcon className="h-4 w-4" />
+                  Salvar
+                </>
+              )}
             </Button>
           </DialogFooter>
         </form>
