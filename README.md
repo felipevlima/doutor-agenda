@@ -39,3 +39,4 @@ AULA 1 = A
 AULA 2 = 7
 AULA 3 = X
 AULA 4 = 9
+AULA 5 = B
