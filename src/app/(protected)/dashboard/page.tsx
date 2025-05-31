@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import {
+  PageActions,
   PageContainer,
   PageContent,
   PageDescription,
@@ -11,7 +12,7 @@ import {
 } from "@/components/ui/page-container";
 import { auth } from "@/lib/auth";
 
-import SignOutButton from "./_components/singoutButton";
+import DatePicker from "./_components/datepicker";
 
 const DashboardPage = async () => {
   const session = await auth.api.getSession({
@@ -35,12 +36,12 @@ const DashboardPage = async () => {
             Access a detailed overview of key metrics and patient outcomes
           </PageDescription>
         </PageHeaderContent>
+        <PageActions>
+          <DatePicker />
+        </PageActions>
       </PageHeader>
       <PageContent>
-        <div>
-          <p>{session?.user.name}</p>
-          <SignOutButton></SignOutButton>
-        </div>
+        <div></div>
       </PageContent>
     </PageContainer>
   );

@@ -124,7 +124,7 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <DropdownMenu>
+            <DropdownMenu >
               <SidebarMenuButton size="lg">
                 <Avatar>
                   <AvatarFallback>F</AvatarFallback>

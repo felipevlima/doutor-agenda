@@ -54,7 +54,7 @@ export const columns: ColumnDef<typeof patientsTable.$inferSelect>[] = [
     id: "actions",
     header: "",
     cell: ({ row }) => {
-      return <TableActions data={row.original} />;
+      return <TableActions patient={row.original} />;
     },
   },
 ];

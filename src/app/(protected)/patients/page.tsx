@@ -50,7 +50,7 @@ export default async function PatientsPage() {
         </PageActions>
       </PageHeader>
       <PageContent>
-        <div className="rounded-lg border border-zinc-200 bg-white p-4">
+        <div className="rounded-lg border border-zinc-100 bg-white p-4">
           <DataTable columns={columns} data={patients} />
         </div>
       </PageContent>
