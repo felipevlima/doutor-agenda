@@ -60,7 +60,7 @@ const items = [
 const otherItems = [
   {
     title: "Planos",
-    url: "/plans",
+    url: "/subscription",
     icon: Diamond,
   },
 ];
@@ -124,7 +124,7 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <DropdownMenu >
+            <DropdownMenu>
               <SidebarMenuButton size="lg">
                 <Avatar>
                   <AvatarFallback>F</AvatarFallback>

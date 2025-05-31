@@ -20,18 +20,31 @@ export const auth = betterAuth({
   },
   plugins: [
     customSession(async ({ user, session }) => {
-      const clinics = await db.query.usersToClinicsTable.findMany({
-        where: eq(schema.usersToClinicsTable.userId, user.id),
-        with: {
-          clinic: true,
-        },
-      });
+      const [userData, clinics] = await Promise.all([
+        db.query.usersTable.findFirst({
+          where: eq(schema.usersTable.id, user.id),
+        }),
+        db.query.usersToClinicsTable.findMany({
+          where: eq(schema.usersToClinicsTable.userId, user.id),
+          with: {
+            clinic: true,
+            user: true,
+          },
+        }),
+      ]);
+      // const clinics = await db.query.usersToClinicsTable.findMany({
+      //   where: eq(schema.usersToClinicsTable.userId, user.id),
+      //   with: {
+      //     clinic: true,
+      //   },
+      // });
 
       const clinic = clinics?.[0];
 
       return {
         user: {
           ...user,
+          plan: userData?.plan,
           clinic: clinic
             ? {
                 id: clinic?.clinicId,
